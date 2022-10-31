@@ -3,6 +3,7 @@ package Exemplos;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -43,14 +44,34 @@ public class ExercicioPropostoSet2 {
 			System.out.println(linguagemFavorita.getNome() + " - " + linguagemFavorita.getide() + " - " + linguagemFavorita.getanoDeCriacao());
 		}
 		
+		System.out.println("\nOrdem IDE");
+		Set<LinguagemFavorita> minhasLinguagensFavoritas3 = new TreeSet<LinguagemFavorita>(new ComparatorIde());
+		minhasLinguagensFavoritas3.addAll(minhasLinguagensFavoritas);
+		for (LinguagemFavorita linguagemFavorita: minhasLinguagensFavoritas3) {
+		System.out.println(linguagemFavorita);
+		}
+		
+		System.out.println("\nOrdem ano de criacao e nome");
+		Set<LinguagemFavorita> minhaLinguagemFavoritas4 = new TreeSet<LinguagemFavorita>(new ComparatorAnoDeCriacaoENome());
+		minhaLinguagemFavoritas4.addAll(minhasLinguagensFavoritas);
+		for (LinguagemFavorita linguagemFavorita: minhaLinguagemFavoritas4) {
+			System.out.println(linguagemFavorita);
+		}
+		
+		System.out.println("\nOrdem Nome / Ano de criacao / IDE");
+		Set<LinguagemFavorita> minhasLinguagemFavoritas5 = new TreeSet<LinguagemFavorita>(new ComparatorNomeAnoDeCriacaoIde());
+		minhasLinguagemFavoritas5.addAll(minhasLinguagensFavoritas);
+		for (LinguagemFavorita linguagemFavorita: minhasLinguagemFavoritas5) {
+			System.out.println(linguagemFavorita);
+		}
 		
 	}
 }
 
 class LinguagemFavorita implements Comparable<LinguagemFavorita> {
-	private String nome;
-	private String ide;
-	private Integer anoDeCriacao;
+	public String nome;
+	public String ide;
+	public Integer anoDeCriacao;
 
 	public LinguagemFavorita(String nome, String ide, Integer tempoEpisodio) {
 		this.nome = nome;
@@ -88,10 +109,41 @@ class LinguagemFavorita implements Comparable<LinguagemFavorita> {
         return nome.equals(that.nome);
     }
 
-
 	@Override
     public int compareTo(LinguagemFavorita linguagemFavorita) {
         return this.nome.compareTo(linguagemFavorita.nome);
     }
 	
+	}
+
+
+
+class ComparatorIde implements Comparator<LinguagemFavorita>{
+
+    @Override
+    public int compare(LinguagemFavorita lf1, LinguagemFavorita lf2) {
+        return lf1.ide.compareToIgnoreCase(lf2.ide);
+    }
+}
+
+class ComparatorAnoDeCriacaoENome implements Comparator<LinguagemFavorita>{
+
+    @Override
+    public int compare(LinguagemFavorita lf1, LinguagemFavorita lf2) {
+        int anoDeCriacao = Integer.compare(lf1.anoDeCriacao, lf2.anoDeCriacao);
+        if (anoDeCriacao != 0) return anoDeCriacao;
+        return lf1.nome.compareToIgnoreCase(lf2.nome);
+    }
+}
+
+class ComparatorNomeAnoDeCriacaoIde implements Comparator<LinguagemFavorita>{
+
+    @Override
+    public int compare(LinguagemFavorita lf1, LinguagemFavorita lf2) {
+        int nome = lf1.nome.compareToIgnoreCase(lf2.nome);
+        int anoDeCriacao = Integer.compare(lf1.anoDeCriacao, lf2.anoDeCriacao);
+        if (nome != 0) return nome;
+        if (anoDeCriacao != 0) return anoDeCriacao;
+        return lf1.ide.compareToIgnoreCase(lf2.ide);
+    }
 }
