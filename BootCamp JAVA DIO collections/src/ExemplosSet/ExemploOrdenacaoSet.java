@@ -1,4 +1,4 @@
-package Exemplos;
+package ExemplosSet;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
