@@ -37,7 +37,7 @@ public class ExemploOrdenacaoSet {
 			add(new Serie("that '70s show", "comedia", 25));
 		}};
 		
-		for(Serie serie: minhasSeries) {
+		for(Serie serie: minhasSeries1) {
 			System.out.println(serie.getNome() + " - " + serie.getGenero() + " - " + serie.getTempoEpisodio());
 		}
 		
