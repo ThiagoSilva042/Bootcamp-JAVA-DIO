@@ -1,5 +1,5 @@
 
-public class Carro {
+public class Carro extends Veiculo {
 
 	String cor;
 	String modelo;
@@ -12,6 +12,10 @@ public class Carro {
 		this.capacidadeTanque = capacidadeTanque;
 	}
 	
+	public Carro() {
+		// TODO Auto-generated constructor stub
+	}
+
 	//Gets e Sets
 	public String getCor() {
 		return cor;
